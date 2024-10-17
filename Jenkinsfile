@@ -10,7 +10,7 @@ pipeline {
         stage('Git') {
             steps {
                 echo 'Pull code from github'
-                git url : 'https://github.com/anxgh-n/jenkins-gateway-airline/tree/main/Gateway.git',branch:'main'
+                git url : 'https://github.com/anxgh-n/jenkins-gateway-airl.git',branch:'master'
             }
         }
         stage('Build') {
