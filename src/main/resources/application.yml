@@ -1,0 +1,54 @@
+spring:
+  main:
+    web-application-type: REACTIVE
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: airline
+          uri: http://localhost:9097
+          predicates:
+            - Path=/airline/**
+          filters:
+            - AuthenticationFilter
+        - id: flightservice
+          uri: http://localhost:9098
+          predicates:
+            - Path=/flightservice/**
+          filters:
+            - AuthenticationFilter
+        - id: passenger
+          uri: http://localhost:9099
+          predicates:
+            - Path=/passangerinfo/**
+          filters:
+            - AuthenticationFilter
+        - id: authentication-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/auth/**
+
+
+server:
+  port: 8060
+
+# Eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# Zipkin
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+
