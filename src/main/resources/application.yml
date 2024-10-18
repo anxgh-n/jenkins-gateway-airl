@@ -27,8 +27,8 @@ spring:
             - Path=/passangerinfo/**
           filters:
             - AuthenticationFilter
-        - id: authentication-service
-          uri: http://localhost:8090
+        - id: security
+          uri: http://security-container:8090
           predicates:
             - Path=/api/auth/**
 
